@@ -1,0 +1,1204 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>0~6 歲兒童睡眠週期與聲音影響睡眠深度研究</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --surface-hover: #222633;
+      --border: #2a2e3d;
+      --text: #e4e6ed;
+      --text-dim: #9499ad;
+      --accent: #7c6ef0;
+      --accent-light: #a89df5;
+      --accent-bg: rgba(124, 110, 240, 0.08);
+      --green: #4ade80;
+      --green-bg: rgba(74, 222, 128, 0.08);
+      --yellow: #facc15;
+      --yellow-bg: rgba(250, 204, 21, 0.08);
+      --red: #f87171;
+      --red-bg: rgba(248, 113, 113, 0.08);
+      --blue: #60a5fa;
+      --blue-bg: rgba(96, 165, 250, 0.08);
+      --pink: #f472b6;
+      --pink-bg: rgba(244, 114, 182, 0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.8;
+      font-size: 16px;
+    }
+
+    /* Hero */
+    .hero {
+      position: relative;
+      padding: 80px 24px 60px;
+      text-align: center;
+      background: linear-gradient(135deg, #1a1040 0%, #0f1117 50%, #0a1628 100%);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; left: 50%; transform: translateX(-50%);
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,110,240,0.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-icon {
+      font-size: 64px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, #e4e6ed, #a89df5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero p {
+      color: var(--text-dim);
+      font-size: 1.05rem;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+    .hero-meta {
+      margin-top: 24px;
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+    .hero-meta span {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 16px;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* Layout */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Nav */
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 0;
+    }
+    .toc-inner {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+    .toc-inner::-webkit-scrollbar { display: none; }
+    .toc a {
+      flex-shrink: 0;
+      text-decoration: none;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      padding: 6px 14px;
+      border-radius: 16px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .toc a:hover {
+      color: var(--accent-light);
+      border-color: var(--accent);
+      background: var(--accent-bg);
+    }
+
+    /* Sections */
+    section {
+      padding: 56px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    section:last-child { border-bottom: none; }
+
+    h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    h2 .section-num {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid rgba(124, 110, 240, 0.2);
+      border-radius: 8px;
+      padding: 4px 10px;
+      letter-spacing: 1px;
+    }
+    .section-desc {
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      margin: 32px 0 16px;
+      color: var(--text);
+      padding-left: 14px;
+      border-left: 3px solid var(--accent);
+    }
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 20px 0 10px;
+      color: var(--text-dim);
+    }
+
+    p { margin-bottom: 14px; color: var(--text); }
+
+    /* Tables */
+    .table-wrap {
+      overflow-x: auto;
+      margin: 20px 0;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+    }
+    thead {
+      background: var(--surface);
+    }
+    th {
+      padding: 14px 16px;
+      text-align: left;
+      font-weight: 600;
+      color: var(--accent-light);
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: var(--surface-hover); }
+
+    /* Cards */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      margin: 16px 0;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(124, 110, 240, 0.3); }
+    .card-title {
+      font-weight: 700;
+      font-size: 1.05rem;
+      margin-bottom: 6px;
+    }
+    .card-sub {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 14px;
+    }
+
+    /* Sound Type Cards Grid */
+    .sound-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    @media (min-width: 640px) {
+      .sound-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .sound-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+    .sound-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+    }
+    .sound-card.white::before { background: linear-gradient(90deg, #e2e8f0, #94a3b8); }
+    .sound-card.pink::before { background: linear-gradient(90deg, #f9a8d4, #ec4899); }
+    .sound-card.lullaby::before { background: linear-gradient(90deg, #c4b5fd, #7c3aed); }
+    .sound-card.maternal::before { background: linear-gradient(90deg, #fca5a5, #ef4444); }
+    .sound-card.nature::before { background: linear-gradient(90deg, #86efac, #22c55e); }
+    .sound-card.binaural::before { background: linear-gradient(90deg, #93c5fd, #3b82f6); }
+
+    .sound-card .icon { font-size: 32px; margin-bottom: 12px; display: block; }
+    .sound-card .name { font-weight: 700; font-size: 1.1rem; margin-bottom: 4px; }
+    .sound-card .en-name { font-size: 0.8rem; color: var(--text-dim); margin-bottom: 12px; }
+
+    /* Tags */
+    .tag {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 12px;
+      margin-right: 6px;
+      margin-bottom: 6px;
+    }
+    .tag-green { background: var(--green-bg); color: var(--green); border: 1px solid rgba(74,222,128,0.2); }
+    .tag-yellow { background: var(--yellow-bg); color: var(--yellow); border: 1px solid rgba(250,204,21,0.2); }
+    .tag-red { background: var(--red-bg); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+    .tag-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid rgba(96,165,250,0.2); }
+    .tag-purple { background: var(--accent-bg); color: var(--accent-light); border: 1px solid rgba(124,110,240,0.2); }
+
+    /* Stats */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .stat-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .stat-label {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-top: 4px;
+    }
+
+    /* Callout */
+    .callout {
+      border-radius: 12px;
+      padding: 20px 24px;
+      margin: 20px 0;
+      border-left: 4px solid;
+      font-size: 0.92rem;
+    }
+    .callout-purple {
+      background: var(--accent-bg);
+      border-color: var(--accent);
+    }
+    .callout-yellow {
+      background: var(--yellow-bg);
+      border-color: var(--yellow);
+    }
+    .callout-red {
+      background: var(--red-bg);
+      border-color: var(--red);
+    }
+    .callout-green {
+      background: var(--green-bg);
+      border-color: var(--green);
+    }
+    .callout-blue {
+      background: var(--blue-bg);
+      border-color: var(--blue);
+    }
+    .callout strong {
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    /* Source */
+    .source {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 12px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .source a {
+      color: var(--accent-light);
+      text-decoration: none;
+    }
+    .source a:hover { text-decoration: underline; }
+
+    /* Progress bar */
+    .bar-wrap {
+      margin: 8px 0;
+    }
+    .bar-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .bar-track {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      border-radius: 4px;
+      transition: width 0.6s ease;
+    }
+    .bar-fill.purple { background: linear-gradient(90deg, var(--accent), var(--accent-light)); }
+    .bar-fill.green { background: linear-gradient(90deg, #22c55e, #4ade80); }
+    .bar-fill.blue { background: linear-gradient(90deg, #3b82f6, #60a5fa); }
+
+    /* Safety meter */
+    .safety-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin: 20px 0;
+    }
+    @media (min-width: 640px) {
+      .safety-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .safety-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+    }
+    .safety-icon {
+      font-size: 28px;
+      flex-shrink: 0;
+    }
+    .safety-text .label { font-weight: 600; font-size: 0.95rem; }
+    .safety-text .value { font-size: 0.85rem; color: var(--text-dim); }
+
+    /* Age timeline */
+    .timeline {
+      position: relative;
+      margin: 32px 0;
+      padding-left: 32px;
+    }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      top: 0; bottom: 0; left: 14px;
+      width: 2px;
+      background: linear-gradient(180deg, var(--accent), var(--pink), var(--green));
+    }
+    .tl-item {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .tl-item::before {
+      content: '';
+      position: absolute;
+      left: -24px; top: 6px;
+      width: 12px; height: 12px;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+    }
+    .tl-item:nth-child(2)::before { background: var(--pink); }
+    .tl-item:nth-child(3)::before { background: var(--blue); }
+    .tl-item:nth-child(4)::before { background: var(--green); }
+    .tl-age {
+      font-weight: 700;
+      font-size: 1rem;
+      margin-bottom: 4px;
+    }
+    .tl-sound {
+      font-size: 0.9rem;
+      color: var(--accent-light);
+      margin-bottom: 4px;
+    }
+    .tl-reason {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* Comparison overview table highlight */
+    .rate-high { color: var(--green); font-weight: 700; }
+    .rate-mid { color: var(--yellow); font-weight: 700; }
+    .rate-low { color: var(--red); font-weight: 700; }
+
+    /* Insight cards */
+    .insight-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin: 24px 0;
+    }
+    @media (min-width: 640px) {
+      .insight-grid { grid-template-columns: 1fr 1fr; }
+    }
+    .insight-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px;
+    }
+    .insight-card .num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .insight-card .title {
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .insight-card .desc {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    footer {
+      padding: 40px 24px;
+      text-align: center;
+      color: var(--text-dim);
+      font-size: 0.82rem;
+      border-top: 1px solid var(--border);
+    }
+    footer a { color: var(--accent-light); text-decoration: none; }
+
+    /* Key finding list */
+    .key-list {
+      list-style: none;
+      margin: 12px 0;
+    }
+    .key-list li {
+      position: relative;
+      padding: 8px 0 8px 28px;
+      font-size: 0.92rem;
+      color: var(--text);
+    }
+    .key-list li::before {
+      content: '>';
+      position: absolute;
+      left: 0; top: 8px;
+      color: var(--accent);
+      font-weight: 700;
+      font-family: monospace;
+      font-size: 1rem;
+    }
+
+    /* Study reference */
+    .study-ref {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 16px 20px;
+      margin: 12px 0;
+      font-size: 0.85rem;
+    }
+    .study-ref .title {
+      font-weight: 600;
+      color: var(--accent-light);
+      margin-bottom: 4px;
+    }
+    .study-ref .meta {
+      color: var(--text-dim);
+      font-size: 0.8rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.6rem; }
+      .hero { padding: 48px 16px 40px; }
+      h2 { font-size: 1.3rem; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <div class="hero">
+    <span class="hero-icon">🌙</span>
+    <h1>0~6 歲兒童睡眠週期<br>與聲音影響睡眠深度研究</h1>
+    <p>基於 PubMed 學術文獻、AAP/WHO 官方指引與真實用戶經驗的交叉比對研究報告</p>
+    <div class="hero-meta">
+      <span>23+ 篇學術文獻</span>
+      <span>34 項系統性回顧</span>
+      <span>2026 年 3 月整理</span>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <nav class="toc">
+    <div class="toc-inner">
+      <a href="#sleep-arch">睡眠架構</a>
+      <a href="#review">系統性回顧</a>
+      <a href="#white">白噪音</a>
+      <a href="#pink">粉紅噪音</a>
+      <a href="#lullaby">搖籃曲</a>
+      <a href="#maternal">母體聲音</a>
+      <a href="#binaural">雙耳節拍</a>
+      <a href="#safety">安全指引</a>
+      <a href="#age-rec">年齡建議</a>
+      <a href="#overview">總覽比較</a>
+      <a href="#insights">產品啟示</a>
+    </div>
+  </nav>
+
+  <div class="container">
+
+    <!-- Section 1: Sleep Architecture -->
+    <section id="sleep-arch">
+      <h2><span class="section-num">01</span> 0-6 歲睡眠架構的發展變化</h2>
+      <p class="section-desc">兒童的睡眠結構與成人截然不同——從週期長度、REM 比例到入睡模式，幾乎每個面向都有根本差異。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>指標</th>
+              <th>新生兒 (0-3月)</th>
+              <th>嬰兒 (3-12月)</th>
+              <th>幼兒 (1-3歲)</th>
+              <th>學齡前 (3-6歲)</th>
+              <th>成人</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>睡眠週期</strong></td>
+              <td>40-50 分鐘</td>
+              <td>50-60 分鐘</td>
+              <td>~60 分鐘</td>
+              <td>60→90 分鐘</td>
+              <td>90-110 分鐘</td>
+            </tr>
+            <tr>
+              <td><strong>REM 佔比</strong></td>
+              <td><span class="rate-high">~50%</span></td>
+              <td>逐漸 &lt;50%</td>
+              <td>~30-35%</td>
+              <td>~25-30%</td>
+              <td>20-25%</td>
+            </tr>
+            <tr>
+              <td><strong>慢波深睡 N3</strong></td>
+              <td>未分化</td>
+              <td>逐漸出現</td>
+              <td>~20-30%</td>
+              <td>~20-30%</td>
+              <td>10-20%</td>
+            </tr>
+            <tr>
+              <td><strong>睡眠起始</strong></td>
+              <td>REM 先行</td>
+              <td>轉為 NREM (~6月)</td>
+              <td>NREM 先行</td>
+              <td>NREM 先行</td>
+              <td>NREM 先行</td>
+            </tr>
+            <tr>
+              <td><strong>每日需求</strong></td>
+              <td>14-17 小時</td>
+              <td>12-15 小時</td>
+              <td>11-14 小時</td>
+              <td>10-13 小時</td>
+              <td>7-9 小時</td>
+            </tr>
+            <tr>
+              <td><strong>睡眠型態</strong></td>
+              <td>多相（多段）</td>
+              <td>漸趨日間型</td>
+              <td>雙相（含午睡）</td>
+              <td>單相或雙相</td>
+              <td>單相</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout callout-purple">
+        <strong>關鍵知識</strong>
+        新生兒 REM 佔 50%（成人僅 20%），REM 對大腦神經可塑性和突觸發育至關重要。兒童慢波振幅比成人更大（351 vs 215 μV/s），深睡天生更強烈——因為擁有更多尚未經歷青春期修剪的突觸連結。睡眠紡錘波在 3 個月出現，標誌大腦關鍵成熟節點。約 5 歲時，睡眠架構才趨近成人模式。
+      </div>
+
+      <div class="study-ref">
+        <div class="title">核心文獻</div>
+        <div class="meta">
+          Lenehan et al. (2022) <em>Maternal and Child Health Journal</em> — 93 篇研究、~90,000 名受試者 |
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9925493/" target="_blank">PMC</a><br>
+          El Shakankiry (2011) <em>Nature and Science of Sleep</em> |
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC3630965/" target="_blank">PMC</a><br>
+          Kurth et al. (2010) <em>Sleep</em> |
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC2849786/" target="_blank">PMC</a><br>
+          Bathory & Tomopoulos (2017) <em>Current Problems in Pediatrics</em> |
+          <a href="https://pubmed.ncbi.nlm.nih.gov/28117135/" target="_blank">PubMed</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 2: Systematic Review -->
+    <section id="review">
+      <h2><span class="section-num">02</span> 系統性回顧：各類聲音正面效果比較</h2>
+      <p class="section-desc">2022 年首篇聽覺刺激與睡眠的系統性回顧（34 篇研究，1,103 人），揭示不同聲音類型的效果差距巨大。</p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num">81.9%</div>
+          <div class="stat-label">粉紅噪音正面效果</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">66.7%</div>
+          <div class="stat-label">複合聲音正面效果</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">33%</div>
+          <div class="stat-label">白噪音正面效果</div>
+        </div>
+      </div>
+
+      <div class="bar-wrap">
+        <div class="bar-label"><span>粉紅噪音 (11 篇研究)</span><span class="rate-high">81.9%</span></div>
+        <div class="bar-track"><div class="bar-fill purple" style="width: 81.9%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span>複合聲音 (6 篇研究)</span><span class="rate-mid">66.7%</span></div>
+        <div class="bar-track"><div class="bar-fill blue" style="width: 66.7%"></div></div>
+      </div>
+      <div class="bar-wrap">
+        <div class="bar-label"><span>白噪音 (18 篇研究)</span><span class="rate-low">33%</span></div>
+        <div class="bar-track"><div class="bar-fill green" style="width: 33%"></div></div>
+      </div>
+
+      <div class="callout callout-yellow" style="margin-top: 24px;">
+        <strong>注意</strong>
+        粉紅噪音的正面效果比例遠高於白噪音，但短期應用均未報告不良反應。整體而言，作者認為尚無「強力證據」支持常規使用，仍需更多兒童專屬研究。
+      </div>
+
+      <div class="study-ref">
+        <div class="title">核心文獻</div>
+        <div class="meta">
+          Capezuti et al. (2022) <em>Journal of Clinical Sleep Medicine</em>, 18(6):1697-1709 |
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9163611/" target="_blank">PMC</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 3: White Noise -->
+    <section id="white">
+      <h2><span class="section-num">03</span> 白噪音 White Noise</h2>
+      <p class="section-desc">研究最多、使用最廣泛的助眠聲音，但需注意音量與使用時長的安全問題。</p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num">80%</div>
+          <div class="stat-label">白噪音組 5 分鐘內入睡</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">25%</div>
+          <div class="stat-label">對照組自然入睡</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">40 名</div>
+          <div class="stat-label">新生兒受試者 (2-7 天大)</div>
+        </div>
+      </div>
+
+      <h3>研究結果摘要</h3>
+
+      <div class="card">
+        <div class="card-title">經典研究：白噪音與新生兒入睡</div>
+        <div class="card-sub">Spencer et al. (1990) | Archives of Disease in Childhood</div>
+        <ul class="key-list">
+          <li>白噪音組 <strong>80%（16/20）</strong>在 5 分鐘內入睡</li>
+          <li>對照組僅 <strong>25%（5/20）</strong>自然入睡</li>
+          <li>結論：白噪音可有效幫助照顧者安撫難以入睡的新生兒</li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/2405784/" target="_blank">PubMed</a> |
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC1792397/" target="_blank">PMC</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">早產兒統合分析</div>
+        <div class="card-sub">PMC (2024) | 多項 RCT 統合</div>
+        <ul class="key-list">
+          <li>延長 24 小時總睡眠時間</li>
+          <li>改善 12 小時睡眠效率</li>
+          <li>減少覺醒次數</li>
+          <li>但對延長夜間連續睡眠時間無顯著效果</li>
+        </ul>
+        <div class="source">
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10794858/" target="_blank">PMC</a>
+        </div>
+      </div>
+
+      <div class="callout callout-red">
+        <strong>安全警示</strong>
+        2024 年範圍回顧（20 篇文獻，~9,428 名人類受試者）發現：白噪音設備最高音量可超過 91 dB；動物模型顯示持續中等強度白噪音暴露對早期聽覺皮層發展有不良影響。建議限制市售白噪音設備的最大音量和使用時長。<br><br>
+        <em>De Jong et al. (2024) Sleep Medicine | <a href="https://pubmed.ncbi.nlm.nih.gov/38663282/" target="_blank" style="color: var(--red);">PubMed</a></em>
+      </div>
+    </section>
+
+    <!-- Section 4: Pink Noise -->
+    <section id="pink">
+      <h2><span class="section-num">04</span> 粉紅噪音 Pink Noise</h2>
+      <p class="section-desc">正面效果比例最高（81.9%）的聲音類型，能增強慢波活動，但對兒童 REM 的影響需謹慎評估。</p>
+
+      <div class="stats-row">
+        <div class="stat-box">
+          <div class="stat-num">58%</div>
+          <div class="stat-label">入睡時間改善幅度</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">+51.3%</div>
+          <div class="stat-label">兒童慢波振盪增幅</div>
+        </div>
+        <div class="stat-box">
+          <div class="stat-num">+10.7%</div>
+          <div class="stat-label">青少年慢波振幅增幅</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">粉紅噪音對腦波同步性和睡眠鞏固的影響</div>
+        <div class="card-sub">Zhou et al. (2012) | Journal of Theoretical Biology | 56 名成人</div>
+        <ul class="key-list">
+          <li>顯著降低腦電波複雜度（使腦波更同步化）</li>
+          <li>穩定睡眠時間百分比顯著提升</li>
+          <li>入睡潛伏期從 <strong>23 分鐘降至 13.5 分鐘</strong></li>
+          <li>比其他聲音類型能引起更廣泛的腦區反應</li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/22726808/" target="_blank">PubMed</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">聽覺刺激增強青少年慢波活動</div>
+        <div class="card-sub">Garcia Molina et al. (2025) | Journal of Sleep Research | 17 名 13-18 歲志願者</div>
+        <ul class="key-list">
+          <li>慢波振幅增加 <strong>+10.7%</strong></li>
+          <li>總慢波活動增加 <strong>+7.38%</strong></li>
+          <li>微覺醒次數和 alpha/beta 頻帶功率未受影響（不會打擾睡眠）</li>
+          <li>使用居家穿戴式 EEG 裝置，具臨床應用潛力</li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/39653656/" target="_blank">PubMed</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">聽覺刺激對兒童慢波與記憶鞏固</div>
+        <div class="card-sub">Kwon et al. (2025) | bioRxiv 預印本 | 健康兒童 + 癲癇兒童</div>
+        <ul class="key-list">
+          <li>與自然腦波同步的粉紅噪音脈衝 → 慢波振盪增加 <strong>51.3%</strong></li>
+          <li>慢波-紡錘波複合體增加 <strong>32.3%</strong></li>
+          <li>慢波和紡錘波的增強與睡眠依賴性記憶鞏固呈<strong>正相關</strong></li>
+          <li>效果在健康兒童和癲癇兒童中均可觀察到</li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/40462986/" target="_blank">PubMed</a>
+        </div>
+      </div>
+
+      <div class="callout callout-yellow">
+        <strong>REM 睡眠干擾風險</strong>
+        粉紅噪音雖然能增強慢波活動，但研究發現可能干擾 REM 睡眠。兒童 REM 比例高達 50%（新生兒）且對腦發育至關重要，使用於 0-6 歲族群需格外謹慎。目前缺乏幼兒專屬的長期安全數據。
+      </div>
+    </section>
+
+    <!-- Section 5: Lullaby -->
+    <section id="lullaby">
+      <h2><span class="section-num">05</span> 搖籃曲 Lullabies</h2>
+      <p class="section-desc">最安全、研究最充分的聲音介入方式。嬰兒對搖籃曲的放鬆反應可能是天生的。</p>
+
+      <div class="card">
+        <div class="card-title">嬰兒對陌生外國搖籃曲的放鬆反應</div>
+        <div class="card-sub">Bainbridge et al. (2020) | Nature Human Behaviour | 144 名嬰兒 (平均 7.2 月)</div>
+        <span class="tag tag-purple">Nature 等級期刊</span>
+        <span class="tag tag-green">跨文化通用</span>
+        <ul class="key-list">
+          <li>嬰兒聽到<strong>陌生外國文化</strong>的搖籃曲時，展現可測量的放鬆反應</li>
+          <li>測量指標：心率降低、皮膚電活動（壓力指標）降低、瞳孔縮小</li>
+          <li>效果在出生第一年中保持一致</li>
+          <li>結論：嬰兒對搖籃曲的反應可能是<strong>天生的（innate）</strong>，而非學習而來</li>
+        </ul>
+        <div class="source">
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8220405/" target="_blank">PMC</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">母親現場搖籃曲 vs. 錄音搖籃曲</div>
+        <div class="card-sub">Namjoo et al. (2021) | JCIM | 90 名早產兒</div>
+        <ul class="key-list">
+          <li><strong>錄音搖籃曲組</strong>的嬰兒整夜睡眠時間最長（p&lt;0.05）</li>
+          <li>推測原因：錄音搖籃曲提供更<strong>一致穩定</strong>的聲音刺激</li>
+          <li>對你的產品設計意義：<strong>音頻產品的一致性是優勢而非劣勢</strong></li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/34022122/" target="_blank">PubMed</a>
+        </div>
+      </div>
+
+      <div class="callout callout-green">
+        <strong>搖籃曲的安撫要素</strong>
+        根據 Chorna et al. (2019) 的研究，最具安撫效果的搖籃曲具有以下特徵：慢節奏（60-80 BPM）、頻繁重複、少動態變化、音域狹窄、高連續性。人腦從子宮內（約 25 週）就具備天生的音樂處理能力。<br><br>
+        <em><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6446122/" target="_blank" style="color: var(--green);">PMC</a></em>
+      </div>
+
+      <h3>音樂療法統合分析</h3>
+      <div class="card">
+        <div class="card-sub">Yue et al. (2021) | J Advanced Nursing | 13 個 RCT，1,093 名參與者</div>
+        <ul class="key-list">
+          <li>音樂療法顯著改善：心率、呼吸頻率、口腔餵食量、壓力水平、母親焦慮</li>
+          <li>搖籃曲對早產兒的安撫和睡眠促進效果已被充分證實</li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/33200833/" target="_blank">PubMed</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 6: Maternal Sounds -->
+    <section id="maternal">
+      <h2><span class="section-num">06</span> 母體聲音 Maternal Sounds</h2>
+      <p class="section-desc">心跳聲與母親語音——從胎兒期就開始影響的聲音記憶。</p>
+
+      <div class="card">
+        <div class="card-title">母親心跳聲 + 白噪音對早產兒的效果</div>
+        <div class="card-sub">Zhang & He (2023) | Annals of Palliative Medicine | 121 名早產兒</div>
+        <ul class="key-list">
+          <li>干預組心率和行為狀態評分在 10、20 分鐘時顯著低於基線</li>
+          <li>到第 14 天體重增長更多，住院期間奶量攝入增加</li>
+          <li>結論：<strong>有效降低心率、穩定情緒、促進睡眠、增加奶量</strong></li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/36747385/" target="_blank">PubMed</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">產前語音暴露對新生兒睡眠的安撫效果</div>
+        <div class="card-sub">Lang et al. (2020) | Brain Science | 34 名胎兒（實驗組 23 名）</div>
+        <span class="tag tag-purple">胎兒學習</span>
+        <span class="tag tag-green">聲音記憶</span>
+        <ul class="key-list">
+          <li>方法：從孕期 34 週起，每天以 80 dB 播放母親錄製的搖籃詩兩次</li>
+          <li>出生後 2 週和 5 週再次聽到該聲音時：<strong>更少清醒、更多深睡、更低心率</strong></li>
+          <li>對照組無此效果</li>
+          <li>證實：<strong>嬰兒保留了產前聲音記憶，影響出生後的行為和心率</strong></li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/32748860/" target="_blank">PubMed</a> |
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7464711/" target="_blank">PMC</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 7: Binaural Beats -->
+    <section id="binaural">
+      <h2><span class="section-num">07</span> 雙耳節拍 Binaural Beats</h2>
+      <p class="section-desc">成人研究顯示有潛力，但目前完全缺乏 0-6 歲兒童的安全性和有效性數據。</p>
+
+      <div class="callout callout-red">
+        <strong>不建議用於 0-6 歲兒童</strong>
+        目前僅有一項探索雙耳節拍對 ADHD 兒童注意力（非睡眠）的先驅研究。成人研究中：3 Hz 雙耳節拍可促進 delta 波和 NREM 第 3 期深睡；0.25 Hz 雙耳節拍可縮短慢波睡眠潛伏期。但兒童專屬研究極為有限，無法推薦使用。
+      </div>
+
+      <div class="study-ref">
+        <div class="title">參考文獻</div>
+        <div class="meta">
+          A Review of Binaural Beats and the Brain |
+          <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC11367212/" target="_blank">PMC</a><br>
+          Binaural beats at 0.25 Hz shorten the latency to slow-wave sleep |
+          <a href="https://pubmed.ncbi.nlm.nih.gov/39478090/" target="_blank">PubMed</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 8: Safety -->
+    <section id="safety">
+      <h2><span class="section-num">08</span> 安全使用指引</h2>
+      <p class="section-desc">來自 AAP（美國兒科學會）2023 年指引與 WHO 環境噪音指引。</p>
+
+      <h3>AAP 2023 年建議</h3>
+      <div class="safety-grid">
+        <div class="safety-item">
+          <span class="safety-icon">🔊</span>
+          <div class="safety-text">
+            <div class="label">音量上限</div>
+            <div class="value">&lt; 50 dB（安靜圖書館的音量）</div>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="safety-icon">📏</span>
+          <div class="safety-text">
+            <div class="label">放置距離</div>
+            <div class="value">至少 7 英尺（約 200 公分）</div>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="safety-icon">⏱️</span>
+          <div class="safety-text">
+            <div class="label">使用時長</div>
+            <div class="value">僅在入睡時段，入睡後調低或關閉</div>
+          </div>
+        </div>
+        <div class="safety-item">
+          <span class="safety-icon">🚫</span>
+          <div class="safety-text">
+            <div class="label">避免</div>
+            <div class="value">整夜連續播放、使用最大音量</div>
+          </div>
+        </div>
+      </div>
+
+      <h3>WHO 噪音指引</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>環境</th>
+              <th>建議上限</th>
+              <th>說明</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>臥室（夜間室內）</td>
+              <td><strong>&lt; 30 dB(A)</strong></td>
+              <td>確保良好睡眠品質</td>
+            </tr>
+            <tr>
+              <td>臥室（夜間室外）</td>
+              <td><strong>&lt; 40 dB(A)</strong></td>
+              <td>防止健康不良影響</td>
+            </tr>
+            <tr>
+              <td>教室</td>
+              <td><strong>&lt; 35 dB(A)</strong></td>
+              <td>確保良好教學和學習條件</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3>音量安全的硬數據</h3>
+      <div class="card">
+        <div class="card-title">嬰兒睡眠機的危險音壓水平</div>
+        <div class="card-sub">Hugh et al. (2014) | Pediatrics</div>
+        <ul class="key-list">
+          <li>14 台嬰兒睡眠機在最大音量、30 cm 距離 → <strong>全部超過 50 dBA</strong></li>
+          <li>其中 3 台超過 <strong>85 dBA</strong>（超出成人職業噪音標準）</li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/24590753/" target="_blank">PubMed</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-title">白噪音設備的安全距離測試</div>
+        <div class="card-sub">Hong et al. (2021) | Int J Pediatric Otorhinolaryngology | 8 台機器 + 6 個 App</div>
+        <ul class="key-list">
+          <li>最小音量時：無設備超過 85 dBA</li>
+          <li>最大音量時：64.3%（9/14）在 10cm 距離超過 85 dBA</li>
+          <li>放置在 30cm 以外時：無設備超過 85 dBA</li>
+          <li><strong>結論：避免使用最大音量，設備放置至少 30cm 以外</strong></li>
+        </ul>
+        <div class="source">
+          <a href="https://pubmed.ncbi.nlm.nih.gov/33992973/" target="_blank">PubMed</a>
+        </div>
+      </div>
+
+      <div class="callout callout-red">
+        <strong>AAP 特別警示 (2023)</strong>
+        感音神經性聽力損失通常是不可逆的。從嬰兒期開始的噪音暴露具有累積效應。嬰兒依賴成人保護；兒童可能無法辨識危險音量。噪音暴露作為嚴重公共衛生問題在全球被嚴重低估。<br><br>
+        <em>Balk et al. (2023) Pediatrics | <a href="https://pubmed.ncbi.nlm.nih.gov/37864407/" target="_blank" style="color: var(--red);">PubMed</a></em>
+      </div>
+    </section>
+
+    <!-- Section 9: Age Recommendations -->
+    <section id="age-rec">
+      <h2><span class="section-num">09</span> 各年齡段最佳聲音建議</h2>
+      <p class="section-desc">根據睡眠架構發展與現有研究證據，針對不同年齡的聲音選擇建議。</p>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-age">0-3 個月 新生兒</div>
+          <div class="tl-sound">白噪音 / 噓聲 / 心跳聲</div>
+          <div class="tl-reason">最接近子宮環境，模擬血流聲和心跳節律。此時期 REM 佔 50%、睡眠週期僅 40-50 分鐘，聲音遮蔽能減少在週期轉換時被喚醒。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-age">3-12 個月 嬰兒期</div>
+          <div class="tl-sound">白噪音 + 搖籃曲（60-80 BPM）</div>
+          <div class="tl-reason">開始發展聲音偏好，辨認照顧者聲音。睡眠紡錘波出現（3 月），NREM 分期成熟（6 月），搖籃曲的天生放鬆反應此時期最明顯。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-age">1-3 歲 幼兒期</div>
+          <div class="tl-sound">因人而異：白噪音 / 自然聲 / 故事</div>
+          <div class="tl-reason">睡眠整合期，午睡逐漸減少。偏好個人化，部分孩子可自行表達喜好。深睡集中在前 1/3 夜，持續性聲音有助於維持前半夜的深睡品質。</div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-age">3-6 歲 學齡前</div>
+          <div class="tl-sound">柔和音樂（60-80 BPM）/ 低音量粉紅噪音</div>
+          <div class="tl-reason">睡眠架構趨近成人（~5 歲週期達 90 分鐘），REM 降至 25-30%。慢波睡眠仍比成人豐富（20-30% vs 10-20%），粉紅噪音可進一步增強。</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 10: Overview -->
+    <section id="overview">
+      <h2><span class="section-num">10</span> 六大聲音類型總覽比較</h2>
+      <p class="section-desc">綜合研究充分度、睡眠深度影響、安全性與兒童適用性的完整對照。</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>聲音類型</th>
+              <th>研究充分度</th>
+              <th>對睡眠深度的影響</th>
+              <th>安全性</th>
+              <th>兒童適用建議</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>白噪音</strong></td>
+              <td><span class="tag tag-green">充分</span></td>
+              <td>加速入睡（80% vs 25%）</td>
+              <td><span class="tag tag-yellow">需控制</span></td>
+              <td>低音量、&gt;200cm、限時使用</td>
+            </tr>
+            <tr>
+              <td><strong>粉紅噪音</strong></td>
+              <td><span class="tag tag-blue">中等</span></td>
+              <td>慢波活動 +7~51%（效果最強）</td>
+              <td><span class="tag tag-yellow">需謹慎</span></td>
+              <td>缺乏幼兒專屬數據，可能干擾 REM</td>
+            </tr>
+            <tr>
+              <td><strong>搖籃曲</strong></td>
+              <td><span class="tag tag-green">充分</span></td>
+              <td>降低心率、增加深睡</td>
+              <td><span class="tag tag-green">極佳</span></td>
+              <td>最安全首選，天生的放鬆反應</td>
+            </tr>
+            <tr>
+              <td><strong>母體聲音</strong></td>
+              <td><span class="tag tag-blue">中等</span></td>
+              <td>穩定心率、促進深睡</td>
+              <td><span class="tag tag-green">極佳</span></td>
+              <td>最適合新生兒 / 早產兒</td>
+            </tr>
+            <tr>
+              <td><strong>自然聲</strong></td>
+              <td><span class="tag tag-yellow">有限</span></td>
+              <td>促進放鬆（成人研究為主）</td>
+              <td><span class="tag tag-green">需控制音量</span></td>
+              <td>理論安全但缺乏直接證據</td>
+            </tr>
+            <tr>
+              <td><strong>雙耳節拍</strong></td>
+              <td><span class="tag tag-red">不足</span></td>
+              <td>成人有效，兒童無數據</td>
+              <td><span class="tag tag-red">未知</span></td>
+              <td>不建議用於 0-6 歲</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Section 11: Insights -->
+    <section id="insights">
+      <h2><span class="section-num">11</span> 對產品設計的啟示</h2>
+      <p class="section-desc">從研究數據與社群討論中提煉出的商業洞察與差異化機會。</p>
+
+      <div class="insight-grid">
+        <div class="insight-card">
+          <div class="num">01</div>
+          <div class="title">巨大的研究缺口 = 差異化機會</div>
+          <div class="desc">現有研究以成人為主，針對 0-6 歲兒童的聲音介入研究極少。如果你的產品能建立在兒童專屬的科學基礎上，將形成強大的競爭壁壘。</div>
+        </div>
+        <div class="insight-card">
+          <div class="num">02</div>
+          <div class="title">搖籃曲的天生反應是最強賣點</div>
+          <div class="desc">嬰兒對搖籃曲的放鬆反應是跨文化、天生的（Nature Human Behaviour 等級期刊背書）。錄音搖籃曲甚至比現場演唱更有效——這直接支持音頻產品的價值主張。</div>
+        </div>
+        <div class="insight-card">
+          <div class="num">03</div>
+          <div class="title">粉紅噪音 REM 干擾 = 差異化定位</div>
+          <div class="desc">粉紅噪音對 REM 睡眠的潛在干擾風險，是競品可能忽略的安全議題。你可以用「保護兒童 REM 睡眠」作為差異化定位，同時展現專業度。</div>
+        </div>
+        <div class="insight-card">
+          <div class="num">04</div>
+          <div class="title">安全是家長第一關心的事</div>
+          <div class="desc">從社群討論來看，家長最關心的不是「哪種聲音最好」，而是「會不會傷害聽力」和「會不會產生依賴」。產品若能內建音量安全機制（自動限制 50 dB），將直擊痛點。</div>
+        </div>
+      </div>
+
+      <div class="callout callout-blue" style="margin-top: 24px;">
+        <strong>社群觀察：家長的真實語言</strong>
+        「白噪音機是育兒神器」「拯救了我的理智」——這是家長論壇最常見的描述。但同時也有大量焦慮討論：「會不會讓寶寶上癮？」「出門沒有機器怎麼辦？」「會不會影響聽力和語言發展？」你的內容行銷可以直接回應這些焦慮，用研究數據建立信任。
+      </div>
+    </section>
+
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p style="margin-bottom: 8px;"><strong>資料來源</strong></p>
+      <p>PubMed / PMC 學術文獻 | AAP 美國兒科學會官方指引 | WHO 世界衛生組織環境噪音指引 | Reddit 育兒社群 | 產品評測網站</p>
+      <p style="margin-top: 16px;">研究整理日期：2026 年 3 月 | 共引用 23+ 篇同行評審文獻</p>
+    </div>
+  </footer>
+
+</body>
+</html>
